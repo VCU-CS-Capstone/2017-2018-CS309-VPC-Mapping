@@ -54,6 +54,52 @@ https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-eas
 
 Once you have this setup, we should be able to set our environment variables. Copy `.env.example.yml` to `.env.yml` and change variables as necessary.
 
+Running `serverless-deploy --aws-profile your-profile-name-here` will begin deploying (or redeploy) the code. 
+
+The following endpoints will be created
+
+```
+https://twblu1e9n9.execute-api.us-east-1.amazonaws.com/dev
+https://twblu1e9n9.execute-api.us-east-1.amazonaws.com/dev/list-asvs
+https://twblu1e9n9.execute-api.us-east-1.amazonaws.com/dev/list-assets
+```
+
+**NOTE** To debug runtime errors in AWS Lambda functions with the serverless framework, it is useful to view the logs from AWS. Simply run the following:
+
+```
+time serverless --aws-profile serverless-demo logs -f listAssets
+```
+
+Where `listAssets` can be any of the lambda functions defined in [https://github.com/VCU-CS-Capstone/2017-2018-CS309-VPC-Mapping/blob/master/serverless.yml](serverless.yml).
+
+## Slack Slash Commands
+
+Once functions are hosted in AWS Lambda, it is possible to connect these newly created endpoints to a Slack Slash Command.
+
+If not yet created, head to https://api.slack.com/apps to create your slack bot. Then select *Slash Commands* in the sidebar.
+
+Create the following slash commands with the endoints deployed with the serverless framework.
+
+```
+Command: /zeebo
+Request URL: https://twblu1e9n9.execute-api.us-east-1.amazonaws.com/dev
+Short Description: Create server architecture diagrams
+```
+
+```
+Command: /zeebo-list-asvs
+Request URL: https://twblu1e9n9.execute-api.us-east-1.amazonaws.com/dev/list-asvs
+Short Description: List assets for an ASV
+```
+
+```
+Command: /zeebo-list-assets
+Request URL: https://twblu1e9n9.execute-api.us-east-1.amazonaws.com/dev/list-assets
+Short Description: List assets for a tag
+```
+
+Now slash commands can be run with your chatbot.
+
 ## Expanding the Diagram Builder
 
 To expand upon the diagram builder, a new load class for the new server type must be created. Using the aws sdk load all of the data from the desired server. Once data is returned resolve the data array. Add the file to the src/diagrambuilder/index.js
