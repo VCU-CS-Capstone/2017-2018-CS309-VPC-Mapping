@@ -14,16 +14,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.131.0",
+    "aws-sdk": "^2.231.1",
     "chai": "^4.1.2",
     "chai-fs": "^2.0.0",
-    "express": "^4.16.1",
+    "express": "^4.16.3",
     "mocha": "^4.1.0",
     "mustache": "^2.3.0",
     "node-plantuml": "^0.5.0",
+    "npm": "^6.0.0",
     "promise": "^8.0.1",
     "slackbots": "^1.1.0",
     "uuid": "^3.2.1",
-    "webcola": "^3.3.6"
+    "webcola": "^3.3.8",
+    "hoek": "4.2.1"
   }
 }
